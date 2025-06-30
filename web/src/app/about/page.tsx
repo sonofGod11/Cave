@@ -5,14 +5,14 @@ export default function AboutPage() {
   return (
     <main className="max-w-3xl mx-auto py-16 px-4">
       <h1 className="text-4xl font-extrabold text-green-700 mb-4 drop-shadow">About Cave</h1>
-      <p className="text-lg text-gray-700 mb-8">Empowering Ghanaians to pay for life's essentials—quickly, securely, and all in one place.</p>
+      <p className="text-lg text-gray-700 mb-8">Empowering Ghanaians to pay for life&apos;s essentials—quickly, securely, and all in one place.</p>
       <section className="mb-10">
         <h2 className="text-2xl font-bold text-green-600 mb-2">Our Story</h2>
         <p className="text-gray-700 mb-2">
           Cave was founded with a simple goal: to make payments in Ghana effortless and accessible for everyone. We saw how time-consuming and stressful it could be to pay for electricity, water, internet, and other services. So, we built a platform that brings all your payments together—securely, instantly, and with a beautiful user experience.
         </p>
         <p className="text-gray-700">
-          Today, thousands of Ghanaians trust Cave to handle their bills, airtime, data, school fees, insurance, and more. We're proud to be a Ghanaian company, built for Ghanaians, and always listening to our users.
+          Today, thousands of Ghanaians trust Cave to handle their bills, airtime, data, school fees, insurance, and more. We&apos;re proud to be a Ghanaian company, built for Ghanaians, and always listening to our users.
         </p>
       </section>
       <section className="mb-10 grid grid-cols-1 md:grid-cols-3 gap-6">

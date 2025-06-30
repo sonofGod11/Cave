@@ -7,9 +7,10 @@ import {
   createUserWithEmailAndPassword,
   signOut as firebaseSignOut,
   signInWithPhoneNumber,
-  RecaptchaVerifier,
   User,
-  sendEmailVerification
+  sendEmailVerification,
+  ConfirmationResult,
+  ApplicationVerifier
 } from "firebase/auth";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 
@@ -17,10 +18,10 @@ interface AuthContextType {
   user: User | null;
   loading: boolean;
   role: string | null;
-  signUpEmail: (email: string, password: string) => Promise<any>;
-  signInEmail: (email: string, password: string) => Promise<any>;
+  signUpEmail: (email: string, password: string) => Promise<unknown>;
+  signInEmail: (email: string, password: string) => Promise<unknown>;
   signOut: () => Promise<void>;
-  signInPhone: (phone: string, appVerifier: any) => Promise<any>;
+  signInPhone: (phone: string, appVerifier: ApplicationVerifier) => Promise<ConfirmationResult>;
   resendEmailVerification: () => Promise<void>;
 }
 
@@ -59,7 +60,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const signInEmail = (email: string, password: string) =>
     signInWithEmailAndPassword(auth, email, password);
   const signOut = () => firebaseSignOut(auth);
-  const signInPhone = (phone: string, appVerifier: any) =>
+  const signInPhone = (phone: string, appVerifier: ApplicationVerifier) =>
     signInWithPhoneNumber(auth, phone, appVerifier);
 
   const resendEmailVerification = async () => {

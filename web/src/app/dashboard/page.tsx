@@ -49,7 +49,6 @@ function BillModal({ service, onClose, onTransactionSuccess, user }: {
   onTransactionSuccess: (service: string, amount: number, status: 'success' | 'failed', provider?: string) => void,
   user: any
 }) {
-  if (!service) return null;
   // All hooks must be declared at the top level, unconditionally
   const [amount, setAmount] = useState("");
   const [account, setAccount] = useState("");
@@ -88,6 +87,17 @@ function BillModal({ service, onClose, onTransactionSuccess, user }: {
   const [bankAccount, setBankAccount] = useState("");
   const [bankCode, setBankCode] = useState("");
   const [accountName, setAccountName] = useState("");
+  
+  // Crypto payment state
+  const [cryptoCoin, setCryptoCoin] = useState("BTC");
+  const [cryptoAddress, setCryptoAddress] = useState("");
+  const [cryptoAmount, setCryptoAmount] = useState("");
+  const [cryptoStatus, setCryptoStatus] = useState<'pending'|'confirmed'>('pending');
+  const [cryptoLoading, setCryptoLoading] = useState(false);
+  
+  // Now we can have the early return after all hooks
+  if (!service) return null;
+
   const airportOptions = [
     "Accra (ACC)",
     "Kumasi (KMS)",
@@ -215,12 +225,6 @@ function BillModal({ service, onClose, onTransactionSuccess, user }: {
     { code: "010", name: "Fidelity Bank Ghana" }
   ];
 
-  // Crypto payment state
-  const [cryptoCoin, setCryptoCoin] = useState("BTC");
-  const [cryptoAddress, setCryptoAddress] = useState("");
-  const [cryptoAmount, setCryptoAmount] = useState("");
-  const [cryptoStatus, setCryptoStatus] = useState<'pending'|'confirmed'>('pending');
-  const [cryptoLoading, setCryptoLoading] = useState(false);
   const cryptoCoins = [
     { symbol: "BTC", name: "Bitcoin", address: "bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh", qr: "https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=bitcoin:bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh" },
     { symbol: "ETH", name: "Ethereum", address: "0x742d35Cc6634C0532925a3b844Bc454e4438f44e", qr: "https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=ethereum:0x742d35Cc6634C0532925a3b844Bc454e4438f44e" },
@@ -1824,14 +1828,8 @@ export default function Dashboard() {
   const [agentForm, setAgentForm] = useState({ name: '', email: '', phone: '', business: '', location: '', message: '' });
   const [agentSuccess, setAgentSuccess] = useState('');
   const [agentError, setAgentError] = useState('');
-  const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [showScheduledModal, setShowScheduledModal] = useState(false);
   const [paymentData, setPaymentData] = useState<any>({});
-  const [paymentMethod, setPaymentMethod] = useState("");
-  const [isProcessing, setIsProcessing] = useState(false);
-  const [showSuccess, setShowSuccess] = useState(false);
-  const [showError, setShowError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
   const [scheduledPayments, setScheduledPayments] = useState<any[]>([]);
   const [recurringPayments, setRecurringPayments] = useState<any[]>([]);
 

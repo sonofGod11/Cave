@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-let mockTransactions = [
+const mockTransactions = [
   { id: 'TXN1', service: 'Electricity', amount: 100, status: 'success', date: '2024-06-25', provider: 'ECG' },
   { id: 'TXN2', service: 'Airtime', amount: 20, status: 'success', date: '2024-06-24', provider: 'MTN' },
 ];
