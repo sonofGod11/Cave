@@ -44,6 +44,31 @@ export default function AboutPage() {
           <li>Trusted by thousands across Ghana.</li>
         </ul>
       </section>
+      <section className="mb-12">
+        <h2 className="text-3xl font-extrabold text-green-700 mb-6 text-center drop-shadow">Start Using Cave in 3 Easy Steps</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center">
+            <span className="text-4xl mb-3">📱</span>
+            <h3 className="text-lg font-bold text-green-700 mb-2">Download Cave</h3>
+            <p className="text-gray-600 text-center">Find “Cave” in your app store and install it on your phone.</p>
+          </div>
+          <div className="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center">
+            <span className="text-4xl mb-3">📝</span>
+            <h3 className="text-lg font-bold text-green-700 mb-2">Create Your Free Account</h3>
+            <p className="text-gray-600 text-center">Open the app and sign up in seconds. All you need is your basic info!</p>
+          </div>
+          <div className="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center">
+            <span className="text-4xl mb-3">💸</span>
+            <h3 className="text-lg font-bold text-green-700 mb-2">Add Money & Pay Bills</h3>
+            <p className="text-gray-600 text-center">Top up your account and pay your bills—fast, easy, and secure.</p>
+          </div>
+        </div>
+        <div className="flex justify-center mt-8">
+          <a href="#download" className="px-10 py-4 rounded-full bg-green-600 text-white font-bold text-xl shadow-lg hover:bg-green-700 transition-all flex items-center gap-2">
+            Download Cave Now <span aria-hidden>→</span>
+          </a>
+        </div>
+      </section>
       <section className="mb-10">
         <h2 className="text-2xl font-bold text-green-600 mb-6">Meet the Team</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">

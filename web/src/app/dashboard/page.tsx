@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useAuth } from "../AuthProvider";
 
 const mockUser = {
@@ -618,9 +618,9 @@ function BillModal({ service, onClose, onTransactionSuccess, user }: {
     : 'bg-gradient-to-r from-gray-300 to-gray-400';
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
-      <div className="bg-white rounded-3xl shadow-2xl p-0 w-full max-w-md relative overflow-hidden animate-scale-in max-h-[90vh] flex flex-col">
-        <button onClick={handleClose} className="absolute top-3 right-4 text-2xl text-gray-400 hover:text-gray-700">&times;</button>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-2">
+      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md p-4 sm:p-8 relative">
+        <button onClick={handleClose} aria-label="Close modal" className="absolute top-3 right-4 text-2xl text-gray-400 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-green-400">&times;</button>
         {/* Header */}
         <div className={`flex items-center gap-3 px-6 py-4 ${headerGradient} rounded-t-3xl shadow-md mb-2`}>
           <span className="text-2xl">{service.icon}</span>
@@ -1475,8 +1475,8 @@ function ScheduledPaymentsModal({
   const selectedServiceData = services.find(s => s.name === service);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
-      <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-2xl mx-4 max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-2">
+      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md p-4 sm:p-8 relative">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl font-bold text-gray-800">
             {type === 'scheduled' ? 'Schedule Payment' : 'Set Up Recurring Payment'}
@@ -1814,6 +1814,31 @@ function ScheduledPaymentsModal({
   );
 }
 
+function BottomNavBar() {
+  const pathname = usePathname();
+  const navItems = [
+    { href: "/dashboard", label: "Dashboard", icon: "🏠" },
+    { href: "/bills", label: "Bills", icon: "💡" },
+    { href: "/history", label: "History", icon: "📜" },
+    { href: "/receipts", label: "Receipts", icon: "🧾" },
+    { href: "/profile", label: "Profile", icon: "👤" },
+  ];
+  return (
+    <nav className="md:hidden fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 shadow z-50">
+      <ul className="flex justify-between items-center px-2 py-1">
+        {navItems.map(item => (
+          <li key={item.href} className="flex-1">
+            <Link href={item.href} className={`flex flex-col items-center justify-center py-2 px-1 text-xs font-medium transition-colors ${pathname === item.href ? 'text-green-600' : 'text-gray-600'} hover:text-green-700`}>
+              <span className="text-xl mb-1">{item.icon}</span>
+              {item.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+}
+
 export default function Dashboard() {
   const { user, loading, resendEmailVerification } = useAuth();
   const router = useRouter();
@@ -1832,6 +1857,10 @@ export default function Dashboard() {
   const [paymentData, setPaymentData] = useState<any>({});
   const [scheduledPayments, setScheduledPayments] = useState<any[]>([]);
   const [recurringPayments, setRecurringPayments] = useState<any[]>([]);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => { setIsClient(true); }, []);
+  if (!isClient) return null;
 
   // Load scheduled and recurring payments
   useEffect(() => {
@@ -2563,20 +2592,20 @@ For support, contact: support@cave.com
             </div>
           </div>
           {showAgent && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-              <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md relative">
-                <button onClick={() => setShowAgent(false)} className="absolute top-3 right-4 text-2xl text-gray-400 hover:text-gray-700">&times;</button>
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-2">
+              <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md p-4 sm:p-8 relative">
+                <button onClick={() => setShowAgent(false)} aria-label="Close modal" className="absolute top-3 right-4 text-2xl text-gray-400 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-green-400">&times;</button>
                 <h3 className="text-xl font-bold mb-4 text-green-700">Agent Application</h3>
                 <form className="flex flex-col gap-4" onSubmit={handleAgentSubmit}>
-                  <input name="name" value={agentForm.name} onChange={handleAgentChange} placeholder="Full Name" className="px-4 py-3 rounded-lg bg-gray-100 border border-green-200 focus:outline-none focus:ring-2 focus:ring-green-400 text-gray-900 placeholder-gray-500" />
-                  <input name="email" value={agentForm.email} onChange={handleAgentChange} placeholder="Email" className="px-4 py-3 rounded-lg bg-gray-100 border border-green-200 focus:outline-none focus:ring-2 focus:ring-green-400 text-gray-900 placeholder-gray-500" />
-                  <input name="phone" value={agentForm.phone} onChange={handleAgentChange} placeholder="Phone" className="px-4 py-3 rounded-lg bg-gray-100 border border-green-200 focus:outline-none focus:ring-2 focus:ring-green-400 text-gray-900 placeholder-gray-500" />
-                  <input name="business" value={agentForm.business} onChange={handleAgentChange} placeholder="Business Name" className="px-4 py-3 rounded-lg bg-gray-100 border border-green-200 focus:outline-none focus:ring-2 focus:ring-green-400 text-gray-900 placeholder-gray-500" />
-                  <input name="location" value={agentForm.location} onChange={handleAgentChange} placeholder="Location" className="px-4 py-3 rounded-lg bg-gray-100 border border-green-200 focus:outline-none focus:ring-2 focus:ring-green-400 text-gray-900 placeholder-gray-500" />
-                  <textarea name="message" value={agentForm.message} onChange={handleAgentChange} placeholder="Message (optional)" className="px-4 py-3 rounded-lg bg-gray-100 border border-green-200 focus:outline-none focus:ring-2 focus:ring-green-400 text-gray-900 placeholder-gray-500" />
+                  <input name="name" value={agentForm.name} onChange={handleAgentChange} placeholder="Full Name" className="w-full min-h-[44px] px-4 py-3 rounded-lg bg-gray-100 border border-green-200 focus:outline-none focus:ring-2 focus:ring-green-400 text-base sm:text-lg text-gray-900 placeholder-gray-500" />
+                  <input name="email" value={agentForm.email} onChange={handleAgentChange} placeholder="Email" className="w-full min-h-[44px] px-4 py-3 rounded-lg bg-gray-100 border border-green-200 focus:outline-none focus:ring-2 focus:ring-green-400 text-base sm:text-lg text-gray-900 placeholder-gray-500" />
+                  <input name="phone" value={agentForm.phone} onChange={handleAgentChange} placeholder="Phone" className="w-full min-h-[44px] px-4 py-3 rounded-lg bg-gray-100 border border-green-200 focus:outline-none focus:ring-2 focus:ring-green-400 text-base sm:text-lg text-gray-900 placeholder-gray-500" />
+                  <input name="business" value={agentForm.business} onChange={handleAgentChange} placeholder="Business Name" className="w-full min-h-[44px] px-4 py-3 rounded-lg bg-gray-100 border border-green-200 focus:outline-none focus:ring-2 focus:ring-green-400 text-base sm:text-lg text-gray-900 placeholder-gray-500" />
+                  <input name="location" value={agentForm.location} onChange={handleAgentChange} placeholder="Location" className="w-full min-h-[44px] px-4 py-3 rounded-lg bg-gray-100 border border-green-200 focus:outline-none focus:ring-2 focus:ring-green-400 text-base sm:text-lg text-gray-900 placeholder-gray-500" />
+                  <textarea name="message" value={agentForm.message} onChange={handleAgentChange} placeholder="Message (optional)" className="w-full min-h-[44px] px-4 py-3 rounded-lg bg-gray-100 border border-green-200 focus:outline-none focus:ring-2 focus:ring-green-400 text-base sm:text-lg text-gray-900 placeholder-gray-500" />
                   {agentError && <div className="text-red-500 text-sm text-center">{agentError}</div>}
                   {agentSuccess && <div className="text-green-600 text-sm text-center">{agentSuccess}</div>}
-                  <button type="submit" className="px-6 py-3 rounded-lg font-bold bg-green-600 text-white shadow hover:bg-green-700 transition-all">Submit Application</button>
+                  <button type="submit" className="w-full min-h-[44px] px-6 py-3 rounded-lg font-bold bg-green-600 text-white shadow hover:bg-green-700 transition-all focus:outline-none focus:ring-2 focus:ring-green-400" aria-label="Submit Application">Submit Application</button>
                 </form>
               </div>
             </div>
@@ -2605,6 +2634,7 @@ For support, contact: support@cave.com
           </button>
         </div>
       </main>
+      <BottomNavBar />
     </div>
   );
 } 

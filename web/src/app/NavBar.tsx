@@ -74,14 +74,14 @@ const NavBar: React.FC = () => {
       </div>
       {/* Mobile Menu */}
       {menuOpen && (
-        <div className="md:hidden bg-white border-t border-green-100 shadow animate-fade-in">
-          <ul className="flex flex-col items-center gap-4 py-4">
+        <div className="md:hidden fixed top-16 left-0 w-full bg-white border-t border-green-100 shadow animate-slide-down z-40 transition-all duration-300">
+          <ul className="flex flex-col items-center gap-4 py-6">
             {navLinks.map(link => (
-              <li key={link.name}>
+              <li key={link.name} className="w-full">
                 {link.href.startsWith("/") ? (
                   <Link
                     href={link.href}
-                    className="block text-lg font-medium px-4 py-2 rounded transition hover:text-green-600 hover:bg-green-50 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 text-gray-900"
+                    className="block w-full text-lg font-medium px-6 py-4 rounded transition hover:text-green-600 hover:bg-green-50 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 text-gray-900 text-center"
                     onClick={() => setMenuOpen(false)}
                   >
                     {link.name}
@@ -89,7 +89,7 @@ const NavBar: React.FC = () => {
                 ) : (
                   <a
                     href={link.href}
-                    className="block text-lg font-medium px-4 py-2 rounded transition hover:text-green-600 hover:bg-green-50 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 text-gray-900"
+                    className="block w-full text-lg font-medium px-6 py-4 rounded transition hover:text-green-600 hover:bg-green-50 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 text-gray-900 text-center"
                     onClick={() => setMenuOpen(false)}
                   >
                     {link.name}
@@ -97,19 +97,19 @@ const NavBar: React.FC = () => {
                 )}
               </li>
             ))}
-            <li>
+            <li className="w-full">
               <a
                 href="#download"
-                className="block border-2 border-green-500 rounded-full px-6 py-2 text-base font-bold text-green-600 bg-white hover:bg-green-50 hover:shadow-lg transition focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 mt-2"
+                className="block w-full border-2 border-green-500 rounded-full px-6 py-4 text-base font-bold text-green-600 bg-white hover:bg-green-50 hover:shadow-lg transition focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 mt-2 text-center"
                 onClick={() => setMenuOpen(false)}
               >
                 Download App <span aria-hidden>→</span>
               </a>
             </li>
-            <li>
+            <li className="w-full">
               <a
                 href="/signin"
-                className="block w-full rounded-full px-6 py-2 text-base font-bold text-white bg-green-600 hover:bg-green-700 shadow transition focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 mt-2 text-center"
+                className="block w-full rounded-full px-6 py-4 text-base font-bold text-white bg-green-600 hover:bg-green-700 shadow transition focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 mt-2 text-center"
                 onClick={() => setMenuOpen(false)}
               >
                 Login

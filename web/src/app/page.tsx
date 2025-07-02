@@ -178,15 +178,15 @@ function ServicesSection() {
     },
   ];
   return (
-    <section className="w-full py-20 bg-green-50 flex flex-col items-center">
-      <h2 className="text-3xl sm:text-4xl font-extrabold text-center mb-4 text-gray-900">Our Services</h2>
-      <p className="text-lg text-center text-gray-700 mb-10 max-w-2xl">Pay all your bills at once, without leaving your home. Cave offers a comprehensive range of services for your convenience.</p>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 w-full max-w-6xl">
+    <section className="w-full py-28 flex flex-col items-center px-2" style={{background: 'radial-gradient(circle at 60% 40%, #6D28D9 0%, #EC4899 40%, #F59E42 70%, #22C55E 100%)'}}>
+      <h2 className="text-4xl font-extrabold text-center mb-8 text-white drop-shadow-lg">Our Services</h2>
+      <p className="text-lg text-center text-white mb-16 max-w-2xl drop-shadow">Pay all your bills at once, without leaving your home. Cave offers a comprehensive range of services for your convenience.</p>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 w-full max-w-6xl">
         {services.map((service) => (
-          <div key={service.name} className="bg-white rounded-2xl shadow p-6 flex flex-col items-center text-center border border-green-100">
-            {service.icon}
+          <div key={service.name} className="bg-white rounded-2xl p-10 flex flex-col items-center text-center border border-green-100 w-full max-w-xs mx-auto transition-transform hover:scale-105 shadow-none">
+            <span className="inline-block bg-green-100 p-5 rounded-full mb-4 text-6xl">{service.icon.props.children}</span>
             <h3 className="font-bold text-lg mb-2 text-gray-900">{service.name}</h3>
-            <p className="text-gray-700 text-base">{service.description}</p>
+            <p className="text-base text-gray-700">{service.description}</p>
           </div>
         ))}
       </div>
@@ -210,15 +210,15 @@ function FAQSection() {
   };
 
   return (
-    <section className="relative z-10 mt-24 w-full flex flex-col items-center">
-      <h2 className="text-2xl sm:text-3xl font-bold text-green-700 mb-8 drop-shadow-md text-center">Checkout our FAQs</h2>
-      <div className="flex flex-col sm:flex-row gap-8 w-full max-w-5xl justify-center">
+    <section className="relative z-10 mt-16 sm:mt-24 w-full flex flex-col items-center px-2 sm:px-0">
+      <h2 className="text-2xl sm:text-3xl font-bold text-green-700 mb-6 sm:mb-8 drop-shadow-md text-center">Checkout our FAQs</h2>
+      <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 w-full max-w-5xl justify-center">
         {/* Categories List */}
-        <div className="flex-1 bg-green-600/90 rounded-3xl p-6 flex flex-col gap-4 shadow-xl border border-white/20 min-w-[260px]">
+        <div className="flex-1 bg-green-600/90 rounded-3xl p-4 sm:p-6 flex flex-col gap-2 sm:gap-4 shadow-xl border border-white/20 min-w-[220px] sm:min-w-[260px] mb-4 sm:mb-0">
           {faqData.map((cat, catIdx) => (
             <div key={cat.category}>
               <button
-                className="flex items-center w-full text-left px-4 py-3 rounded-full bg-white/90 text-green-700 font-semibold text-lg shadow mb-2 focus:outline-none transition-all"
+                className="flex items-center w-full text-left px-4 py-3 rounded-full bg-white/90 text-green-700 font-semibold text-base sm:text-lg shadow mb-2 focus:outline-none transition-all"
                 onClick={() => handleCategory(catIdx)}
               >
                 <span className="mr-2">{openCategory === catIdx ? "▼" : "▶"}</span>
@@ -229,7 +229,7 @@ function FAQSection() {
                   {cat.questions.map((q, qIdx) => (
                     <button
                       key={q.q}
-                      className="flex items-center w-full text-left px-4 py-2 rounded-lg bg-white/70 text-green-900 font-medium shadow focus:outline-none transition-all"
+                      className="flex items-center w-full text-left px-4 py-2 rounded-lg bg-white/70 text-green-900 font-medium text-base sm:text-lg shadow focus:outline-none transition-all"
                       onClick={() => handleQuestion(catIdx, qIdx)}
                     >
                       <span className="mr-2">{openQuestion[catIdx] === qIdx ? "▼" : "▶"}</span>
@@ -242,18 +242,18 @@ function FAQSection() {
           ))}
         </div>
         {/* Questions & Answers */}
-        <div className="flex-1 flex flex-col gap-4 justify-center">
+        <div className="flex-1 flex flex-col gap-2 sm:gap-4 justify-center">
           {openCategory !== null && faqData[openCategory].questions.map((q, qIdx) => (
             <div key={q.q} className="mb-2">
               <button
-                className="flex items-center w-full text-left px-4 py-3 rounded-full bg-white/90 text-blue-700 font-semibold text-lg shadow focus:outline-none transition-all"
+                className="flex items-center w-full text-left px-4 py-3 rounded-full bg-white/90 text-blue-700 font-semibold text-base sm:text-lg shadow focus:outline-none transition-all"
                 onClick={() => handleQuestion(openCategory, qIdx)}
               >
                 <span className="mr-2">{openQuestion[openCategory] === qIdx ? "▼" : "▶"}</span>
                 {q.q}
               </button>
               {openQuestion[openCategory] === qIdx && (
-                <div className="px-6 py-3 bg-white/70 rounded-lg text-blue-900 mt-2 shadow-inner">
+                <div className="px-6 py-3 bg-white/70 rounded-lg text-blue-900 mt-2 shadow-inner text-base sm:text-lg">
                   {q.a}
                 </div>
               )}
@@ -276,37 +276,14 @@ function DownloadButtons() {
 
 function HeroSection() {
   return (
-    <section className="relative w-full min-h-[600px] flex items-center justify-center bg-green-600 overflow-hidden" style={{background: 'linear-gradient(120deg, #22c55e 0%, #16a34a 100%)'}}>
-      {/* Abstract lines background */}
-      <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1440 600" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0 100 Q360 200 720 100 T1440 100" stroke="#fff" strokeOpacity="0.13" strokeWidth="4" fill="none" />
-        <path d="M0 300 Q360 400 720 300 T1440 300" stroke="#fff" strokeOpacity="0.13" strokeWidth="4" fill="none" />
-        <path d="M0 500 Q360 600 720 500 T1440 500" stroke="#fff" strokeOpacity="0.13" strokeWidth="4" fill="none" />
-      </svg>
-      <div className="relative z-10 flex flex-col md:flex-row items-center justify-between w-full max-w-7xl px-6 py-16">
-        {/* Left: Text */}
-        <div className="flex-1 flex flex-col items-start justify-center max-w-xl">
-          <span className="inline-flex items-center bg-white text-green-600 font-semibold px-4 py-2 rounded-full mb-6 text-base shadow">New <span className="ml-2">Cave is live in Ghana →</span></span>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-6 leading-tight drop-shadow-lg">Your One-Stop Hub for Every Payment.</h1>
-          <p className="text-lg sm:text-xl text-white/90 mb-6 max-w-lg">No more stress—pay for electricity, water, internet, and more in seconds, all in one app.</p>
-          <a href="/signup" className="inline-block px-8 py-3 rounded-full border-2 border-green-500 text-white font-semibold text-lg bg-green-600 hover:bg-green-700 transition-all mb-4">
-            Get Started
-          </a>
-          <DownloadButtons />
-        </div>
-        {/* Right: Floating phone images (placeholder SVGs) */}
-        <div className="flex-1 flex items-center justify-center relative mt-12 md:mt-0">
-          <svg width="220" height="420" viewBox="0 0 220 420" className="absolute left-0 top-8 rotate-[-15deg] drop-shadow-xl" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="10" y="10" width="200" height="400" rx="40" fill="#fff" stroke="#ddd" strokeWidth="8" />
-            <rect x="30" y="60" width="160" height="300" rx="24" fill="#f3f4f6" />
-            <rect x="80" y="380" width="60" height="12" rx="6" fill="#eee" />
-          </svg>
-          <svg width="220" height="420" viewBox="0 0 220 420" className="absolute right-0 top-0 rotate-[10deg] drop-shadow-2xl" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="10" y="10" width="200" height="400" rx="40" fill="#fff" stroke="#ddd" strokeWidth="8" />
-            <rect x="30" y="60" width="160" height="300" rx="24" fill="#e0e7ff" />
-            <rect x="80" y="380" width="60" height="12" rx="6" fill="#eee" />
-          </svg>
-        </div>
+    <section className="relative w-full min-h-[600px] flex flex-col items-center justify-center overflow-hidden py-24 px-4" style={{background: 'radial-gradient(circle at 60% 40%, #6D28D9 0%, #EC4899 40%, #F59E42 70%, #22C55E 100%)'}}>
+      <div className="relative z-10 flex flex-col items-center justify-center w-full max-w-3xl mx-auto">
+        <span className="inline-flex items-center bg-green-100 text-green-700 font-semibold px-4 py-2 rounded-full mb-6 text-base shadow">New <span className="ml-2">Cave is live in Ghana →</span></span>
+        <h1 className="text-5xl sm:text-6xl font-extrabold text-white mb-6 leading-tight text-center drop-shadow-lg">Your One-Stop Hub for Every Payment.</h1>
+        <p className="text-xl sm:text-2xl text-white mb-8 max-w-2xl text-center">No more stress—pay for electricity, water, internet, and more in seconds, all in one app.</p>
+        <a href="/signup" className="inline-block px-10 py-4 rounded-full bg-white text-green-700 font-bold text-xl shadow-lg hover:bg-green-100 transition-all mb-4">
+          Get Started
+        </a>
       </div>
     </section>
   );
@@ -314,50 +291,26 @@ function HeroSection() {
 
 function ThreeStepsSection() {
   return (
-    <section className="w-full flex flex-col md:flex-row items-center justify-center py-20 bg-white">
-      {/* Left: Phone image in a green-accented circle */}
-      <div className="flex-1 flex justify-center items-center mb-10 md:mb-0">
-        <div className="relative w-80 h-80 flex items-center justify-center rounded-full bg-gradient-to-br from-green-100 to-green-200 border-2 border-green-400">
-          {/* Placeholder phone SVG */}
-          <svg width="180" height="360" viewBox="0 0 180 360" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="10" y="10" width="160" height="340" rx="36" fill="#fff" stroke="#ddd" strokeWidth="8" />
-            <rect x="30" y="60" width="120" height="220" rx="20" fill="#f3f4f6" />
-            <rect x="70" y="300" width="40" height="10" rx="5" fill="#eee" />
-          </svg>
+    <section className="w-full flex flex-col items-center justify-center py-24" style={{background: 'radial-gradient(circle at 60% 40%, #6D28D9 0%, #EC4899 40%, #F59E42 70%, #22C55E 100%)'}}>
+      <h2 className="text-4xl sm:text-5xl font-extrabold mb-10 text-white text-center drop-shadow-lg">Get Started in 3 Easy Steps</h2>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-10 w-full max-w-5xl">
+        <div className="flex flex-col items-center bg-white rounded-2xl p-8 shadow-sm">
+          <span className="text-5xl mb-4">📱</span>
+          <h3 className="text-xl font-bold mb-2 text-gray-900 text-center">Download Cave</h3>
+          <p className="text-gray-600 text-center">Find "Cave" in your app store and install it on your phone.</p>
+        </div>
+        <div className="flex flex-col items-center bg-white rounded-2xl p-8 shadow-sm">
+          <span className="text-5xl mb-4">📝</span>
+          <h3 className="text-xl font-bold mb-2 text-gray-900 text-center">Create Your Free Account</h3>
+          <p className="text-gray-600 text-center">Open the app and sign up in seconds. All you need is your basic info!</p>
+        </div>
+        <div className="flex flex-col items-center bg-white rounded-2xl p-8 shadow-sm">
+          <span className="text-5xl mb-4">💸</span>
+          <h3 className="text-xl font-bold mb-2 text-gray-900 text-center">Add Money & Pay Bills</h3>
+          <p className="text-gray-600 text-center">Top up your account and pay your bills—fast, easy, and secure.</p>
         </div>
       </div>
-      {/* Right: Steps */}
-      <div className="flex-1 flex flex-col items-start max-w-xl px-4">
-        <h2 className="text-3xl sm:text-4xl font-extrabold mb-6 text-gray-900">
-          3 Simple Steps to Enjoy <span className="text-green-600">Cave.</span>
-        </h2>
-        <ol className="space-y-6 mb-8">
-          <li className="flex items-start gap-4">
-            <span className="flex items-center justify-center w-10 h-10 rounded-full border-2 border-green-400 text-green-600 font-bold text-lg">1</span>
-            <div>
-              <span className="font-bold text-lg text-gray-900">Download and Install the App</span>
-              <p className="text-gray-700">Visit your app store, search for "Cave" and download and install the app on your mobile device.</p>
-            </div>
-          </li>
-          <li className="flex items-start gap-4">
-            <span className="flex items-center justify-center w-10 h-10 rounded-full border-2 border-green-400 text-green-600 font-bold text-lg">2</span>
-            <div>
-              <span className="font-bold text-lg text-gray-900">Sign Up on Cave for Free</span>
-              <p className="text-gray-700">Open the app and follow the quick and easy sign-up process. All you need is your basic personal information.</p>
-            </div>
-          </li>
-          <li className="flex items-start gap-4">
-            <span className="flex items-center justify-center w-10 h-10 rounded-full border-2 border-green-400 text-green-600 font-bold text-lg">3</span>
-            <div>
-              <span className="font-bold text-lg text-gray-900">Add Funds and Pay Bills</span>
-              <p className="text-gray-700">Once you're signed in, you can add funds to your account and start paying your bills. It's that simple!</p>
-            </div>
-          </li>
-        </ol>
-        <a href="#download" className="px-8 py-3 rounded-full border-2 border-green-500 text-white font-semibold text-lg bg-green-600 hover:bg-green-700 transition-all flex items-center gap-2">
-          Get the app <span aria-hidden>→</span>
-        </a>
-      </div>
+      <a href="#download" className="mt-12 px-10 py-4 rounded-full bg-white text-green-700 font-bold text-xl shadow-lg hover:bg-green-100 transition-all">Download Cave Now</a>
     </section>
   );
 }
@@ -369,12 +322,10 @@ export default function Home() {
       <ThreeStepsSection />
       <ServicesSection />
       {/* Ghanaian Service Providers Section */}
-      <section className="relative z-10 w-full flex flex-col items-center mt-20 mb-10">
-        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2 drop-shadow-md text-center">
-          Over <span className="text-green-600 font-extrabold text-3xl">20+</span> Ghanaian Service Providers Connected to Cave
-        </h2>
-        <p className="text-gray-600 mb-8 text-center">Making life easier for users across Ghana</p>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 w-full max-w-6xl px-2">
+      <section className="relative z-10 w-full flex flex-col items-center py-24" style={{background: 'radial-gradient(circle at 60% 40%, #6D28D9 0%, #EC4899 40%, #F59E42 70%, #22C55E 100%)'}}>
+        <h2 className="text-4xl font-extrabold text-center mb-8 text-white drop-shadow-lg">Trusted by Ghana's Top Service Providers</h2>
+        <p className="text-lg text-white mb-16 text-center drop-shadow">Making life easier for users across Ghana</p>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-10 w-full max-w-6xl px-2">
           {[
             { name: 'MTN', color: 'yellow', logo: '/MTN.jpg' },
             { name: 'Telecel', color: 'red', logo: '/Telecel.jpg' },
@@ -402,10 +353,8 @@ export default function Home() {
           ].map((company, i) => (
             <div
               key={company.name}
-              className={`flex flex-col items-center bg-white rounded-2xl p-4 shadow-lg border border-gray-200 transition-transform duration-300 hover:scale-105 hover:shadow-2xl animate-fade-in-up relative`}
-              style={{ animationDelay: `${i * 60}ms` }}
+              className="flex flex-col items-center bg-white rounded-2xl p-6 border border-gray-100 transition-transform hover:scale-105"
             >
-              <div className={`w-full h-2 rounded-t-2xl mb-3 bg-${company.color}-500`} />
               <img src={company.logo} alt={company.name} className="h-14 w-auto mb-4 object-contain" />
               <span className="font-semibold text-gray-900 text-center text-base mt-auto">{company.name}</span>
             </div>
@@ -420,58 +369,42 @@ export default function Home() {
         </svg>
       </div>
       {/* Feature Highlights Section */}
-      <section className="relative z-10 mt-16 grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-4xl w-full">
-        {features.map((feature, idx) => (
-          <div
-            key={feature.title}
-            className={
-              `flex flex-col items-center rounded-2xl p-7 shadow-xl border border-gray-100 transition-all duration-200 hover:scale-105 group ` +
-              `bg-gradient-to-br ` +
-              (idx === 0
-                ? 'from-blue-50 to-blue-100/80'
-                : idx === 1
-                ? 'from-orange-50 to-yellow-100/80'
-                : 'from-green-50 to-green-100/80')
-            }
-            style={{ boxShadow: idx === 0
-              ? '0 8px 32px 0 rgba(59,130,246,0.10)'
-              : idx === 1
-              ? '0 8px 32px 0 rgba(251,191,36,0.10)'
-              : '0 8px 32px 0 rgba(34,197,94,0.10)'}}
-          >
-            <div className="mb-4 flex items-center justify-center w-16 h-16 rounded-full shadow-lg"
-              style={{
-                background: idx === 0
-                  ? 'linear-gradient(135deg, #3B82F6 60%, #60A5FA 100%)'
-                  : idx === 1
-                  ? 'linear-gradient(135deg, #F59E42 60%, #FBBF24 100%)'
-                  : 'linear-gradient(135deg, #22C55E 60%, #4ADE80 100%)',
-              }}
-            >
-              {feature.icon}
-            </div>
-            <h3 className="text-xl font-extrabold mb-2 text-center drop-shadow-md"
-              style={{ color: idx === 0 ? '#2563eb' : idx === 1 ? '#f59e42' : '#22c55e' }}
-            >
-              {feature.title}
-            </h3>
-            <p className="text-gray-700 text-center text-base font-medium">
-              {feature.description}
-            </p>
+      <section className="relative z-10 py-24 w-full flex flex-col items-center" style={{background: 'radial-gradient(circle at 60% 40%, #6D28D9 0%, #EC4899 40%, #F59E42 70%, #22C55E 100%)'}}>
+        <h2 className="text-4xl font-extrabold text-center mb-12 text-white drop-shadow-lg">How Cave Works</h2>
+        <div className="flex flex-col sm:flex-row justify-center items-center gap-12 w-full max-w-5xl">
+          <div className="flex flex-col items-center">
+            <span className="text-5xl bg-green-100 p-5 rounded-full mb-4">📝</span>
+            <h3 className="text-lg font-bold mb-2 text-gray-900 text-center">Sign Up</h3>
+            <p className="text-gray-600 text-center max-w-xs">Create your free Cave account in seconds with just your basic info.</p>
           </div>
-        ))}
+          <div className="flex flex-col items-center">
+            <span className="text-5xl bg-green-100 p-5 rounded-full mb-4">💳</span>
+            <h3 className="text-lg font-bold mb-2 text-gray-900 text-center">Add Funds</h3>
+            <p className="text-gray-600 text-center max-w-xs">Top up your Cave wallet securely using mobile money or bank card.</p>
+          </div>
+          <div className="flex flex-col items-center">
+            <span className="text-5xl bg-green-100 p-5 rounded-full mb-4">🧾</span>
+            <h3 className="text-lg font-bold mb-2 text-gray-900 text-center">Pay Any Bill</h3>
+            <p className="text-gray-600 text-center max-w-xs">Choose from electricity, water, internet, TV, school fees, and more.</p>
+          </div>
+          <div className="flex flex-col items-center">
+            <span className="text-5xl bg-green-100 p-5 rounded-full mb-4">⚡</span>
+            <h3 className="text-lg font-bold mb-2 text-gray-900 text-center">Get Instant Confirmation</h3>
+            <p className="text-gray-600 text-center max-w-xs">Receive real-time notifications and receipts for every payment.</p>
+          </div>
+        </div>
       </section>
-      {/* Trust Badges Row */}
-      <section className="relative z-10 mt-10 flex flex-wrap justify-center gap-6 items-center">
-        <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-xl shadow border border-gray-100">
+      {/* Trust Badges Section */}
+      <section className="relative z-10 py-10 flex flex-wrap justify-center gap-12 items-center mt-20" style={{background: 'radial-gradient(circle at 60% 40%, #6D28D9 0%, #EC4899 40%, #F59E42 70%, #22C55E 100%)'}}>
+        <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-xl border border-gray-100">
           <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#3B82F6" /><text x="12" y="16" textAnchor="middle" fontSize="10" fill="#fff" fontWeight="bold">PCI</text></svg>
           <span className="text-gray-900 font-semibold">PCI DSS Compliant</span>
         </div>
-        <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-xl shadow border border-gray-100">
+        <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-xl border border-gray-100">
           <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="8" fill="#22C55E" /><path d="M8 12l2.5 2.5L16 9" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
           <span className="text-green-700 font-semibold">Secured</span>
         </div>
-        <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-xl shadow border border-gray-100">
+        <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-xl border border-gray-100">
           <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="6" fill="#22C55E" /><text x="12" y="16" textAnchor="middle" fontSize="10" fill="#fff" fontWeight="bold">Ghana</text></svg>
           <span className="text-green-700 font-semibold">Trusted in Ghana</span>
         </div>
@@ -500,7 +433,7 @@ export default function Home() {
                   <div className="text-gray-500 text-sm">{testimonials[idx].role}</div>
                 </div>
               </div>
-              <p className="relative z-10 text-gray-700 text-lg mb-2 italic">“{testimonials[idx].text}”</p>
+              <p className="relative z-10 text-gray-700 text-lg mb-2 italic">"{testimonials[idx].text}"</p>
             </div>
           ))}
         </div>
@@ -523,7 +456,7 @@ export default function Home() {
                   <div className="text-gray-500 text-sm">{testimonials[idx].role}</div>
                 </div>
               </div>
-              <p className="relative z-10 text-gray-700 text-lg mb-2 italic">“{testimonials[idx].text}”</p>
+              <p className="relative z-10 text-gray-700 text-lg mb-2 italic">"{testimonials[idx].text}"</p>
             </div>
           ))}
         </div>
